@@ -92,6 +92,60 @@ python main.py serve
 ```
 The API will be accessible at `http://localhost:8000`.
 
+## REST API
+
+### Query Endpoint
+**POST** `/query`
+
+Query the knowledge graph with a question and receive an AI-generated answer with sources.
+
+#### Request Body
+```json
+{
+  "question": "Who are the ultimate beneficial owners of ACME Trading LLC? Show ownership chains, consolidated percent ownership, and cite the source document names and lines."
+}
+```
+
+#### Response
+```json
+{
+  "answer": "Based on the ingested documents...",
+  "sources": [
+    "Chunk text 1...",
+    "Chunk text 2...",
+    "Chunk text 3..."
+  ]
+}
+```
+
+#### Example with curl
+```bash
+curl -X POST "http://localhost:8000/query" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "question": "Who are the ultimate beneficial owners of ACME Trading LLC? Show ownership chains, consolidated percent ownership, and cite the source document names and lines."
+  }'
+```
+
+#### Example with Python
+```python
+import requests
+
+response = requests.post(
+    "http://localhost:8000/query",
+    json={
+        "question": "Who are the ultimate beneficial owners of ACME Trading LLC? Show ownership chains, consolidated percent ownership, and cite the source document names and lines."
+    }
+)
+
+result = response.json()
+print(f"Answer: {result['answer']}")
+print(f"Sources: {len(result['sources'])} chunks")
+```
+
+### API Documentation
+Once the server is running, visit `http://localhost:8000/docs` for interactive API documentation (Swagger UI).
+
 ## Project Structure
 ```
 ├── config/             # Configuration settings
