@@ -4,6 +4,7 @@ from src.ingestion.pipeline import IngestionPipeline
 from src.retrieval.search import GraphRetriever
 from src.retrieval.generation import RAGGenerator
 from src.core.neo4j_client import neo4j_client
+import truststore
 
 def setup():
     print("Setting up Neo4j schema...")
@@ -12,6 +13,7 @@ def setup():
     print("Setup complete.")
 
 import os
+truststore.inject_into_ssl()
 
 def ingest(path):
     pipeline = IngestionPipeline()
