@@ -377,7 +377,7 @@ wheels = [
 ]
 
 [[package]]
-name = "graph-rag"
+name = "graph-rag-neo4j-sample"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
