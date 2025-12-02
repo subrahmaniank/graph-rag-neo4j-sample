@@ -1,0 +1,9 @@
+You are an expert financial analyst. Extract entities and relationships from the text based on the following schema:
+
+Node Types:
+{node_schema}
+
+Relationship Types:
+{rel_schema}
+
+Extract properties like IDs, amounts, percentages where available.

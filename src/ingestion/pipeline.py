@@ -27,22 +27,22 @@ class IngestionPipeline:
         print("Vector index 'chunk_vector_index' created or already exists.")
 
         # 2. Constraints
+        # 2. Constraints
+        import json
+        import os
+        
+        schema_path = os.path.join(os.path.dirname(__file__), "../../config/graph_schema.json")
+        with open(schema_path, "r") as f:
+            schema = json.load(f)
+
         constraints = [
             "CREATE CONSTRAINT document_id IF NOT EXISTS FOR (d:Document) REQUIRE d.id IS UNIQUE",
-            "CREATE CONSTRAINT chunk_id IF NOT EXISTS FOR (c:Chunk) REQUIRE c.id IS UNIQUE",
-            "CREATE CONSTRAINT legal_entity_name IF NOT EXISTS FOR (e:LegalEntity) REQUIRE e.name IS UNIQUE",
-            "CREATE CONSTRAINT person_name IF NOT EXISTS FOR (e:Person) REQUIRE e.name IS UNIQUE",
-            "CREATE CONSTRAINT account_name IF NOT EXISTS FOR (e:Account) REQUIRE e.name IS UNIQUE",
-            "CREATE CONSTRAINT facility_name IF NOT EXISTS FOR (e:Facility) REQUIRE e.name IS UNIQUE",
-            "CREATE CONSTRAINT transaction_name IF NOT EXISTS FOR (e:Transaction) REQUIRE e.name IS UNIQUE",
-            "CREATE CONSTRAINT branch_name IF NOT EXISTS FOR (e:Branch) REQUIRE e.name IS UNIQUE",
-            "CREATE CONSTRAINT region_name IF NOT EXISTS FOR (e:Region) REQUIRE e.name IS UNIQUE",
-            "CREATE CONSTRAINT instrument_name IF NOT EXISTS FOR (e:Instrument) REQUIRE e.name IS UNIQUE",
-            "CREATE CONSTRAINT registry_name IF NOT EXISTS FOR (e:CompanyRegistry) REQUIRE e.name IS UNIQUE",
-            "CREATE CONSTRAINT sanctions_name IF NOT EXISTS FOR (e:SanctionsList) REQUIRE e.name IS UNIQUE",
-            "CREATE CONSTRAINT event_name IF NOT EXISTS FOR (e:Event) REQUIRE e.name IS UNIQUE",
-            "CREATE CONSTRAINT product_name IF NOT EXISTS FOR (e:Product) REQUIRE e.name IS UNIQUE"
+            "CREATE CONSTRAINT chunk_id IF NOT EXISTS FOR (c:Chunk) REQUIRE c.id IS UNIQUE"
         ]
+        
+        for node in schema['nodes']:
+            label = node['label']
+            constraints.append(f"CREATE CONSTRAINT {label.lower()}_name IF NOT EXISTS FOR (e:{label}) REQUIRE e.name IS UNIQUE")
 
         for constraint in constraints:
             try:
