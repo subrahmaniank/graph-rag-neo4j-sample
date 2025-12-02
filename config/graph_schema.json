@@ -1,0 +1,64 @@
+{
+    "nodes": [
+        {
+            "label": "LegalEntity",
+            "description": "corporates, subsidiaries, SPVs"
+        },
+        {
+            "label": "Person",
+            "description": "signatories, UBOs, employees"
+        },
+        {
+            "label": "Account",
+            "description": "bank accounts"
+        },
+        {
+            "label": "Facility",
+            "description": "credit facilities, loans"
+        },
+        {
+            "label": "Transaction",
+            "description": "high-value transactions"
+        },
+        {
+            "label": "Branch",
+            "description": "organizational units"
+        },
+        {
+            "label": "Region",
+            "description": "organizational units"
+        },
+        {
+            "label": "Instrument",
+            "description": "securities, derivatives"
+        },
+        {
+            "label": "CompanyRegistry",
+            "description": "DUNS, LEI"
+        },
+        {
+            "label": "SanctionsList",
+            "description": "sanctions entries"
+        },
+        {
+            "label": "Event",
+            "description": "alerts, investigations"
+        },
+        {
+            "label": "Product",
+            "description": "trade finance, FX"
+        }
+    ],
+    "relationships": [
+        "HAS_ACCOUNT",
+        "IS_SIGNATORY_OF",
+        "OWNS",
+        "BORROWER_OF",
+        "HAS_EXPOSURE",
+        "FROM",
+        "TO",
+        "REGISTERED_AT",
+        "HAS_ALIAS",
+        "RELATED_TO"
+    ]
+}
